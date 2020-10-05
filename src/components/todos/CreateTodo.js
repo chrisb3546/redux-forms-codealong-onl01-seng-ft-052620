@@ -1,13 +1,110 @@
-import React, { Component } from 'react'
+// import React, { Component } from 'react'
+// import { connect } from 'react-redux';
 
+// class CreateTodo extends Component {
+
+//   state ={
+//     text: ''
+//   }
+
+//   handleChange=(e)=>{
+//     this.setState({
+//       text: e.target.value
+//     })
+    
+//   }
+
+//   handleSubmit = e => {
+//     e.preventDefault()
+//     this.props.addTodo(this.state)
+//   }
+
+//   render() {
+//     return(
+//       <div>
+//            <form>
+//           <p>
+//             <label>add todo</label>
+//             <input type="text" onChange={this.handleChange} value={this.state.text}
+//  />
+//           </p>
+//           <input type="submit"  onSubmit={this.handleSubmit}/>
+//         </form>
+//         {this.state.text}
+//       </div>
+//     )
+//   }
+// }
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     addTodo: formData => dispatch({ type: 'ADD_TODO', payload: formData })
+//   }
+// }
+
+// export default connect(null, mapDispatchToProps)(CreateTodo);
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+ 
 class CreateTodo extends Component {
-  render() {
+  state = {
+    text: ''
+  };
+ 
+  handleChange = event => {
+    this.setState({
+      text: event.target.value
+    });
+  };
+ 
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.addTodo(this.state);
+  };
+ 
+
+    render() {
     return(
       <div>
-        Create Todo Component
+           <form onSubmit={this.handleSubmit}>
+          <p>
+            <label>add todo</label>
+            <input type="text" onChange={this.handleChange} value={this.state.text}
+ />
+          </p>
+          <input type="submit"  />
+        </form>
+        {this.state.text}
       </div>
     )
   }
 }
-
-export default CreateTodo;
+//   render() {
+//     return (
+//       <div>
+//         <form onSubmit={event => this.handleSubmit(event)}>
+//           <p>
+//             <label>add todo</label>
+//               <input
+//                 type="text"
+//                 onChange={event => this.handleChange(event)}
+//                 value={this.state.text}
+//               />
+//           </p>
+//           <input type="submit" />
+//         </form>
+//       </div>
+//     );
+//   }
+// }
+ 
+const mapDispatchToProps = dispatch => {
+  return {
+    addTodo: formData => dispatch({ type: 'ADD_TODO', payload: formData })
+  };
+};
+ 
+export default connect(
+  null,
+  mapDispatchToProps
+)(CreateTodo);
